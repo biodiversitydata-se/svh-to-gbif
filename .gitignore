@@ -1,0 +1,8 @@
+/svh-data-process/target/
+
+
+notes
+.DS_Store
+project-initdata.yml
+svh-data-process/dependency-reduced-pom.xml
+svh-data-process/nbactions.xml
