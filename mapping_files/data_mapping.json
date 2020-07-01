@@ -1,0 +1,204 @@
+[{
+    "institution": "UME",
+    "mapping": {
+      "﻿﻿institutionCode": {
+        "value": "institutionCode",
+        "type": "String"
+      },
+      "CatalogNumber": {
+        "value": "catalogNumber",
+        "type": "String"
+      },
+      "Collector": {
+        "value": "recordedBy",
+        "type": "String"
+      },
+      "collectornumber": {
+        "value": "recordNumber",
+        "type": "String"
+      },
+      "DateCollected": {
+        "value": "eventDate",
+        "type": "date"
+      },
+      "Notes": {
+        "value": "occurrenceRemarks",
+        "type": "String"
+      },
+      "Continent": {
+        "value": "continent",
+        "type": "String"
+      },
+      "Country": {
+        "value": "country",
+        "type": "String"
+      },
+      "Province": {
+        "value": "stateProvince",
+        "type": "String"
+      },
+      "Locality": {
+        "value": "locality",
+        "type": "String"
+      },
+      "WGS84N": {
+        "value": "decimalLatitude",
+        "type": "BigDecimal"
+      },
+      "WGS84S": {
+        "value": "decimalLongitude",
+        "type": "BigDecimal"
+      },
+      "ScientificName": {
+        "value": "scientificName",
+        "type": "String"
+      },
+      "Genus": {
+        "value": "genus",
+        "type": "String"
+      },
+      "SpecificEpithet": {
+        "value": "specificEpithet",
+        "type": "String"
+      },
+      "IntraspecificEpithet": {
+        "value": "infraspecificEpithet",
+        "type": "String"
+      },
+      "RT90-N": {
+        "value": "verbatimLatitude",
+        "type": "String"
+      },
+      "RT90-E": {
+        "value": "verbatimLongitude",
+        "type": "String"
+      },
+      "RUBIN": {
+        "value": "georeferenceRemarks",
+        "type": "String"
+      },
+      "OriginalName": {
+        "value": "previousIdentifications",
+        "type": "String"
+      }
+    }
+  },
+  {
+    "institution": "GB",
+    "mapping": {
+      "﻿﻿institutionCode": {
+        "value": "institutionCode",
+        "type": "String"
+      },
+      "CatalogNumber": {
+        "value": "catalogNumber",
+        "type": "String"
+      },
+      "Collector": {
+        "value": "recordedBy",
+        "type": "String"
+      },
+      "collectornumber": {
+        "value": "recordNumber",
+        "type": "String"
+      },
+      "DateCollected": {
+        "value": "eventDate",
+        "type": "date"
+      },
+      "Notes": {
+        "value": "occurrenceRemarks",
+        "type": "String"
+      },
+      "Continent": {
+        "value": "continent",
+        "type": "String"
+      },
+      "Country": {
+        "value": "country",
+        "type": "String"
+      },
+      "Province": {
+        "value": "stateProvince",
+        "type": "String"
+      },
+      "Locality": {
+        "value": "locality",
+        "type": "String"
+      },
+      "WGS84N": {
+        "value": "decimalLatitude",
+        "type": "BigDecimal"
+      },
+      "WGS84S": {
+        "value": "decimalLongitude",
+        "type": "BigDecimal"
+      },
+      "ScientificName": {
+        "value": "scientificName",
+        "type": "String"
+      },
+      "Genus": {
+        "value": "genus",
+        "type": "String"
+      },
+      "SpecificEpithet": {
+        "value": "specificEpithet",
+        "type": "String"
+      },
+      "IntraspecificEpithet": {
+        "value": "infraspecificEpithet",
+        "type": "String"
+      },
+      "RT90-N": {
+        "value": "verbatimLatitude",
+        "type": "String"
+      },
+      "RT90-E": {
+        "value": "verbatimLongitude",
+        "type": "String"
+      },
+      "RUBIN": {
+        "value": "georeferenceRemarks",
+        "type": "String"
+      },
+      "OriginalName": {
+        "value": "previousIdentifications",
+        "type": "String"
+      }
+    }
+  }
+]
+
+
+
+
+
+// institutionCode  => institutionCode
+// CatalogNumber  => catalogNumber [UME does not have an alphanumeric prefix, GB does: e.g., “GB-0122941”]
+// Collector  => recordedBy [string of all collector names with separators; use pipes as separator]
+// collectornumber => recordNumber [numeric or alphanumeric with separators, non-unique; associate with collection object not event or locality]
+// DateCollected  => eventDate [string for date formatted as yyyy, yyyy-m, yyyy-m-d; single digit month and day are unpadded]
+// Notes => occurrenceRemarks [includes data from several original db remarks fields, some with only numbers; associate with collection object]
+// Comments  => ??????????????????? [includes similar content to “Notes” with more data on physical storage and subsampling; associate with collection object]
+// Continent  => continent
+// Country  => country
+// Province  => stateProvince
+// District  => ???????????????????
+// Locality  => locality [missing for many observations so coordinates (probably) associated with the lower level geography units]
+// WGS84N  => decimalLatitude [value = “0” in most cases when there is no value for “district” or “locality” (perhaps with all Swedish geography)]
+// WGS84S  => decimalLongitude [value = “0” in most cases when there is no value for “district” or “locality” (perhaps with all Swedish geography)]
+// ScientificName  => scientificName
+// Genus => genus
+// SpecificEpithet => specificEpithet
+// IntraspecificEpithet => infraspecificEpithet
+// RT90-N  => verbatimLatitude
+// RT90-E  => verbatimLongitude
+// => verbatimSRS = "RT90"
+// RUBIN => georeferenceRemarks
+// OriginalName  => previousIdentifications [current synonyms, misidentifications, working or manuscript names, author names, and det qualifiers (e.g., “c.f.”)]
+// OriginalText => ??????????????????? [transcribed or interpreted, concatenated collecting event and habitat data]
+
+// Additional notes… these records will through errors in processing.
+// GB-0106470 with misalignment of columns at Genus, SpecificEpithet, etc.
+// GB-0191641 with value for RT90-N without value for RT90-E.
