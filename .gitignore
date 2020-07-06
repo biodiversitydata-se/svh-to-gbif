@@ -6,3 +6,7 @@ notes
 project-initdata.yml
 svh-data-process/dependency-reduced-pom.xml
 svh-data-process/nbactions.xml
+/svh-gbif-datamodel/target/
+/svh-gbif-process/target/
+/svh-gbif-process/nbproject/
+/svh-gbif-process/nb-configuration.xml
