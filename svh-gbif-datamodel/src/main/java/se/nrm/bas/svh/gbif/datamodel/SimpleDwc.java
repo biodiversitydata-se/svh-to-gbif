@@ -26,7 +26,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "simpleDwc")
 @XmlRootElement
 @NamedQueries({
-  @NamedQuery(name = "SimpleDwc.findAll", query = "SELECT s FROM SimpleDwc s") })
+  @NamedQuery(name = "SimpleDwc.findAll", query = "SELECT s FROM SimpleDwc s"),
+  @NamedQuery(name = "SimpleDwc.findCount", query = "SELECT COUNT(s) FROM SimpleDwc s where s.id = :id"),
+})
 public class SimpleDwc implements Serializable {
 
   private static final long serialVersionUID = 1L;
@@ -227,7 +229,7 @@ public class SimpleDwc implements Serializable {
   @Column(name = "associatedOrganisms")
   private String associatedOrganisms;
   
-  @Size(max = 225)
+  @Size(max = 65535)
   @Column(name = "previousIdentifications")
   private String previousIdentifications;
   
