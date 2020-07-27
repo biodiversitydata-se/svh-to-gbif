@@ -18,9 +18,9 @@
       <property name="eclipselink.persistence-context.flush-mode" value="commit"/>
       <property name="eclipselink.persistence-context.persist-on-commit" value="true"/>
       <!--<property name="eclipselink.weaving" value="true"/>-->
-      
-      
-      <property name="hibernate.jdbc.batch_size" value="5000"/>
+       
+      <property name="hibernate.jdbc.batch_size" value="200"/>
+      <property name="hibernate.batch_versioned_data" value="true"/> 
     </properties>
   </persistence-unit>
   
@@ -40,7 +40,8 @@
       <property name="eclipselink.persistence-context.persist-on-commit" value="true"/>
       <!--<property name="eclipselink.weaving" value="true"/>-->
         
-      <property name="hibernate.jdbc.batch_size" value="5000"/>
+      <property name="hibernate.jdbc.batch_size" value="200"/>
+      <property name="hibernate.batch_versioned_data" value="true"/> 
     </properties>
   </persistence-unit>
   
@@ -60,7 +61,8 @@
       <property name="eclipselink.persistence-context.persist-on-commit" value="true"/>
       <property name="eclipselink.weaving" value="true"/>
         
-      <property name="hibernate.jdbc.batch_size" value="5000"/>
+      <property name="hibernate.jdbc.batch_size" value="200"/>
+      <property name="hibernate.batch_versioned_data" value="true"/> 
     </properties>
   </persistence-unit>
   
