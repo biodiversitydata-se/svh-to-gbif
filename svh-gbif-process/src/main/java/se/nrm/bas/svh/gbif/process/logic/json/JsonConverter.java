@@ -7,7 +7,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;  
+import java.util.Map;   
+import java.util.concurrent.atomic.AtomicInteger;
 import javax.json.Json;
 import javax.json.JsonArray;
 import javax.json.JsonArrayBuilder;
@@ -15,8 +16,7 @@ import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder; 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.csv.CSVRecord;
-import se.nrm.bas.svh.gbif.datamodel.SimpleDwc;
-import se.nrm.bas.svh.gbif.process.logic.util.Util;
+import se.nrm.bas.svh.gbif.datamodel.SimpleDwc; 
 
 /**
  *
@@ -25,53 +25,47 @@ import se.nrm.bas.svh.gbif.process.logic.util.Util;
 @Slf4j
 public class JsonConverter implements Serializable {
 
-  public static Object getInstance() {
-    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-  }
-
-  private JsonArrayBuilder arrayBuilder;
-  private JsonObjectBuilder builder;
-
+  
   private final String valueKey = "value";
   private final String typeKey = "type";
   private final String catalogNumberKey = "CatalogNumber";
-  private final int batchSize = 5000;
-  
-  private Map<String, String> map;
-  
-  private int count;
-
+  private final int batchSize = 200;
+    
   public JsonConverter() {
   }
 
-  public List<JsonArray> convertCsvToJson(List<CSVRecord> records,
-          JsonObject mappingJson, String institutionCode) {
-    builder = Json.createObjectBuilder();
-    count = 0;
+  public List<JsonArray> convertCsvToJson(List<CSVRecord> records, JsonObject mappingJson, String institutionCode) {
+    JsonObjectBuilder builder = Json.createObjectBuilder();
+  
+    AtomicInteger counter = new AtomicInteger(0);
     List<JsonArray> list = new ArrayList<>();
-    arrayBuilder = Json.createArrayBuilder();
+    JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
+    
     records.stream()
             .filter(record -> record.isConsistent())
-            .forEach(record -> { 
-              count++; 
-              map = record.toMap(); 
+            .forEach(record -> {  
+              Map<String, String> map = record.toMap(); 
               
-              JsonHelper.getInstance().addIdAttribute(builder, 
-                      Util.getInstance().buildId(map.get(catalogNumberKey), institutionCode)); 
+//              JsonHelper.getInstance().addIdAttribute(builder, 
+//                      Util.getInstance().buildId(map.get(catalogNumberKey), institutionCode));  
+
+              JsonHelper.getInstance().addIdAttribute(builder, map.get(catalogNumberKey)); 
               mappingJson.keySet()
-                      .stream()
+                      .stream() 
                       .forEach(key -> {
-                        JsonHelper.getInstance().addAttributes(builder,
-                                mappingJson.getJsonObject(key).getString(valueKey).trim(),
-                                mappingJson.getJsonObject(key).getString(typeKey), map.get(key));
+                        JsonObject json = mappingJson.getJsonObject(key);
+                        JsonHelper.getInstance().addAttribute(builder,
+                                json.getString(valueKey).trim(),
+                                json.getString(typeKey), map.get(key));
                       });
               arrayBuilder.add(builder);
-              
-              if(count % batchSize == 0) { 
-                JsonArray subArray = arrayBuilder.build(); 
-                list.add(subArray);
+             
+              counter.getAndIncrement();
+              if(counter.get() % batchSize == 0) {  
+                list.add(arrayBuilder.build());
               }
             });
+    list.add(arrayBuilder.build());
     return list;
   }
 
@@ -84,6 +78,5 @@ public class JsonConverter implements Serializable {
       log.error(ex.getMessage());
     }
     return null;
-  }
-
+  } 
 }
