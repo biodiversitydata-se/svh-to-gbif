@@ -36,11 +36,13 @@ public class Logs implements Serializable {
   @Basic(optional = false)
   @Column(name = "id")
   private Integer id;
+  
   @Basic(optional = false)
   @NotNull
   @Column(name = "timestamp")
   @Temporal(TemporalType.TIMESTAMP)
   private Date timestamp;
+  
   @Basic(optional = false)
   @NotNull
   @Column(name = "totalRecords")
