@@ -1,6 +1,6 @@
 package se.nrm.bas.svh.gbif.process.logic.config;
-
-import javax.json.JsonArray;
+ 
+import javax.json.JsonArray; 
 import org.junit.After; 
 import org.junit.Before; 
 import org.junit.Test;
