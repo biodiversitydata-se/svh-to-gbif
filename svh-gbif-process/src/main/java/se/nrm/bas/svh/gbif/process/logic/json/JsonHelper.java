@@ -1,6 +1,6 @@
 package se.nrm.bas.svh.gbif.process.logic.json;
 
-import java.math.BigDecimal;
+import java.math.BigDecimal; 
 import javax.json.JsonObjectBuilder;
 import org.apache.commons.lang3.StringUtils;
 import se.nrm.bas.svh.gbif.process.logic.util.Util;
@@ -12,7 +12,7 @@ import se.nrm.bas.svh.gbif.process.logic.util.Util;
 public class JsonHelper {
   private static JsonHelper instance = null;
   
-  private String idKey = "id";
+  private final String idKey = "id"; 
 
   public static JsonHelper getInstance() {
     synchronized (JsonHelper.class) {
@@ -22,12 +22,12 @@ public class JsonHelper {
     }
     return instance;
   }
-  
+
   public void addIdAttribute(JsonObjectBuilder attBuilder, String value) {
     attBuilder.add(idKey, value);
   }
 
-  public void addAttributes(JsonObjectBuilder attBuilder, String key, String type, String value) { 
+  public void addAttribute(JsonObjectBuilder attBuilder, String key, String type, String value) { 
     
     if (value != null && !StringUtils.isEmpty(value)) {
       try {
@@ -36,8 +36,7 @@ public class JsonHelper {
             attBuilder.add(key, value.trim());
             break;
           case "date":
-            attBuilder.add(key, Util.getInstance().validateDate(value.trim()));
-//            attBuilder.add(key, value.trim());
+            attBuilder.add(key, Util.getInstance().validateDate(value.trim())); 
             break;
           case "int":
             attBuilder.add(key, Integer.parseInt(value));
@@ -45,8 +44,10 @@ public class JsonHelper {
           case "Short":
             attBuilder.add(key, Short.valueOf(value));
             break;
-          case "BigDecimal":
-            attBuilder.add(key, new BigDecimal(value)); 
+          case "BigDecimal": 
+            if(isValidNumber(key, value)) {
+              attBuilder.add(key, new BigDecimal(value)); 
+            } 
             break;
           case "boolean":
             attBuilder.add(key, Boolean.valueOf(value));
@@ -69,4 +70,15 @@ public class JsonHelper {
       } 
     }
   }
+  
+  private boolean isValidNumber(String key, String value) {
+    switch (key) {
+      case "decimalLatitude":
+        return Math.abs(Double.parseDouble(value)) <= 90;
+      case "decimalLongitude":
+        return Math.abs(Double.parseDouble(value)) <= 180;
+      default:
+        return true;
+    }
+  } 
 }
