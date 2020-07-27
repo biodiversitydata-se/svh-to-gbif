@@ -23,10 +23,9 @@
     </developer>
   </developers>
 
-  <modules>
-    <!--<module>svh-data-process</module>-->
+  <modules> 
     <module>svh-gbif-datamodel</module>
-    <module>svh-gbif-process</module>
+    <module>svh-gbif-process</module> 
   </modules>
 
 
