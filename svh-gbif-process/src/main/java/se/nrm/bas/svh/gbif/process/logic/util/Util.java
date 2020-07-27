@@ -4,6 +4,10 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Map;
+import java.util.stream.Collectors;
+import javax.json.JsonArray;
+import javax.json.JsonObject;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -11,11 +15,7 @@ import org.apache.commons.lang3.StringUtils;
  * @author idali
  */
 public class Util {
-  
-  private StringBuilder dataSourceSb;
-  private StringBuilder csvFileSb;
-  private StringBuilder idSb;
-  
+     
   private final String dataSourceInstitution = "export/CSV.php?InstitutionCode=";
   private final String and = "&";
   private final String page = "Page";
@@ -26,6 +26,9 @@ public class Util {
   private final String one = "01";
   private final String zero = "0";
   
+  private final String institutionKey = "institution";
+  private final String mappingKey = "mapping";
+  
   private final DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");  
 
   private static Util instance = null;
@@ -34,11 +37,18 @@ public class Util {
     synchronized (Util.class) {
       if (instance == null) {
         instance = new Util();
-      } 
+      }
     }
     return instance;
   }
-  
+
+  public Map<String, JsonObject> buildJsonMap(JsonArray mappingArray) {
+    return mappingArray.stream()
+            .map(a -> a.asJsonObject())
+            .collect(Collectors.toMap(obj -> obj.getString(institutionKey),
+                    obj -> obj.getJsonObject(mappingKey)));
+  }
+
   public String validateDate(String strDate) {
     boolean isValidate = isValidDate(strDate);
     return isValidate ? strDate : fixInvalidDate(strDate);
@@ -101,7 +111,7 @@ public class Util {
   }
   
   public String buildId(String catalogNumber, String institutionCode) {
-    idSb = new StringBuilder();
+    StringBuilder idSb = new StringBuilder();
     idSb.append(institutionCode);
     idSb.append(dash);
     idSb.append(catalogNumber);
@@ -109,7 +119,7 @@ public class Util {
   }
   
   public String buildCsvDownloadUrl(String dataSourcePath, String institution, int numOfPage) {
-    dataSourceSb = new StringBuilder();
+    StringBuilder dataSourceSb = new StringBuilder();
     dataSourceSb.append(dataSourcePath);
     dataSourceSb.append(dataSourceInstitution);
     dataSourceSb.append(institution);
@@ -122,7 +132,7 @@ public class Util {
   }
   
   public String buildCsvFilePath(String csvFile, String institution, int numOfPage) {
-    csvFileSb = new StringBuilder();
+    StringBuilder csvFileSb = new StringBuilder();
     csvFileSb.append(csvFile);
     csvFileSb.append(institution);
     csvFileSb.append(underscore);
