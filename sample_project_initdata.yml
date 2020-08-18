@@ -1,0 +1,61 @@
+## YAML Template.
+---
+swarm:
+  port:
+    offset: 100
+  deployment:
+    timeout: 500
+  source:
+    export:
+      baseUrl: http://herbarium.emg.umu.se/
+  csv:
+    file:
+      path: /path/to/svh_exports/
+  mapping:
+    file: /path/to/mapping_files/data_mapping.json
+  datasources:
+    jdbc-drivers:
+      com.mysql:
+        driver-class-name: com.mysql.jdbc.Driver
+        xa-datasource-class-name: com.mysql.jdbc.jdbc2.optional.MysqlXADataSource
+        driver-module-name: com.mysql
+    data-sources:
+      SvhUpsDS:
+        driver-name: com.mysql
+        jndi-name: java:jboss/datasources/UpsGbifDS
+        connection-url: jdbc:mysql://localhost:13306/svh_gbif_ups?autoReconnect=true&useSSL=false
+        user-name: user
+        password: password
+        min-pool-size: 8
+        max-pool-size: 35
+        pool-prefill: true
+        autoReconnect: true
+        failOverReadOnly: false&maxReconnects=10&autoReconnect=true
+        validation-query: 'select 1'
+        max-idle-time: 5
+      GbGbifDS:
+        driver-name: com.mysql
+        jndi-name: java:jboss/datasources/GbGbifDS
+        connection-url: jdbc:mysql://localhost:13306/svh_gbif_gb?autoReconnect=true&useSSL=false
+        user-name: user
+        password: password
+        min-pool-size: 8
+        max-pool-size: 35
+        pool-prefill: true
+        autoReconnect: true
+        failOverReadOnly: false&maxReconnects=10&autoReconnect=true
+        validation-query: 'select 1'
+        max-idle-time: 5
+      UmeGbifDS:
+        driver-name: com.mysql
+        jndi-name: java:jboss/datasources/UmeGbifDS
+        connection-url: jdbc:mysql://localhost:13306/svh_gbif_ume?autoReconnect=true&useSSL=false
+        user-name: user
+        password: password
+        min-pool-size: 8
+        max-pool-size: 35
+        pool-prefill: true
+        autoReconnect: true
+        failOverReadOnly: false&maxReconnects=10&autoReconnect=true
+        validation-query: 'select 1'
+        max-idle-time: 5
