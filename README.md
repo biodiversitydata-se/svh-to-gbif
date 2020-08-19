@@ -1,4 +1,6 @@
 # svh-to-gbif
+[![Build Status](https://travis-ci.com/Naturhistoriska/svh-to-gbif.svg?branch=master)](https://travis-ci.com/Naturhistoriska/svh-to-gbif)
+[![codecov](https://codecov.io/gh/Naturhistoriska/svh-to-gbif/branch/master/graph/badge.svg)](https://codecov.io/gh/Naturhistoriska/svh-to-gbif)
 
 Processing data from Sweden's Virtual Herbarium to GBIF.
 
