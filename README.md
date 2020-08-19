@@ -2,7 +2,6 @@
 [![Build Status](https://travis-ci.com/Naturhistoriska/svh-to-gbif.svg?branch=master)](https://travis-ci.com/Naturhistoriska/svh-to-gbif)
 [![codecov](https://codecov.io/gh/Naturhistoriska/svh-to-gbif/branch/master/graph/badge.svg)](https://codecov.io/gh/Naturhistoriska/svh-to-gbif)
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](http://www.gnu.org/licenses/agpl-3.0)
-`[![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](http://www.gnu.org/licenses/agpl-3.0)`
 
 Processing data from Sweden's Virtual Herbarium to GBIF.
 
