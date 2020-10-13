@@ -61,7 +61,7 @@ public class GbifDao implements Serializable {
     EntityManager entityManager = getEntityManager(institutionCode);
     entities.stream()  
             .forEach(entity -> {
-//              isExist(entity.getId(), entityManager);
+//              isExist(entity.getId(), entityManager);  
               SimpleDwc tmp = entity;
               try {
                 tmp = entityManager.merge(entity);             
