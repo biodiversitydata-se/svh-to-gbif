@@ -255,6 +255,92 @@
         "type": "String"
       }
     }
+  },
+  {
+    "institution": "OHN",
+    "download": false,
+    "mapping": {
+      "﻿﻿institutionCode": {
+        "value": "institutionCode",
+        "type": "String"
+      },
+      "CatalogNumber": {
+        "value": "catalogNumber",
+        "type": "String"
+      },
+      "Collector": {
+        "value": "recordedBy",
+        "type": "String"
+      },
+      "collectornumber": {
+        "value": "recordNumber",
+        "type": "String"
+      },
+      "DateCollected": {
+        "value": "eventDate",
+        "type": "date"
+      },
+      "Notes": {
+        "value": "occurrenceRemarks",
+        "type": "String"
+      },
+      "Continent": {
+        "value": "continent",
+        "type": "String"
+      },
+      "Country": {
+        "value": "country",
+        "type": "String"
+      },
+      "Province": {
+        "value": "stateProvince",
+        "type": "String"
+      },
+      "Locality": {
+        "value": "locality",
+        "type": "String"
+      },
+      "WGS84N": {
+        "value": "decimalLatitude",
+        "type": "BigDecimal"
+      },
+      "WGS84S": {
+        "value": "decimalLongitude",
+        "type": "BigDecimal"
+      },
+      "ScientificName": {
+        "value": "scientificName",
+        "type": "String"
+      },
+      "Genus": {
+        "value": "genus",
+        "type": "String"
+      },
+      "SpecificEpithet": {
+        "value": "specificEpithet",
+        "type": "String"
+      },
+      "IntraspecificEpithet": {
+        "value": "infraspecificEpithet",
+        "type": "String"
+      },
+      "RT90-N": {
+        "value": "verbatimLatitude",
+        "type": "String"
+      },
+      "RT90-E": {
+        "value": "verbatimLongitude",
+        "type": "String"
+      },
+      "RUBIN": {
+        "value": "georeferenceRemarks",
+        "type": "String"
+      },
+      "OriginalName": {
+        "value": "previousIdentifications",
+        "type": "String"
+      }
+    }
   }
 ]
 
