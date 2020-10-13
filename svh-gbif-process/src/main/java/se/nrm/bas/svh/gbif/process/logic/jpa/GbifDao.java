@@ -32,8 +32,14 @@ public class GbifDao implements Serializable {
   @PersistenceContext(unitName = "jpaGbifUpsPU")
   private EntityManager upsEntityManager;
   
+  
+  @PersistenceContext(unitName = "jpaGbifOhnPU")
+  private EntityManager ohnEntityManager;
+  
   private final String gb = "GB";
   private final String ume = "UME";
+  private final String ups = "UPS";
+  private final String ohn = "OHN";
   
   public GbifDao() {
   }
@@ -75,8 +81,18 @@ public class GbifDao implements Serializable {
   } 
   
   private EntityManager getEntityManager(String institutionCode) {
-    return institutionCode.equals(gb) ? gbEntityManager
-            : institutionCode.equals(ume) ? umeEntityManager : upsEntityManager;
+    switch(institutionCode) {
+      case gb:
+        return gbEntityManager;
+      case ume:
+        return umeEntityManager;
+      case ups:
+        return upsEntityManager; 
+      case ohn:
+        return ohnEntityManager;
+      default:
+        return gbEntityManager;
+    } 
   }
   
   private void isExist(String id, EntityManager entityManager) { 
