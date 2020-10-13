@@ -20,7 +20,7 @@ public class StartupBean {
   private DataProcessor process;
 
   void init(@Observes @Initialized(ApplicationScoped.class) Object event) {
-    log.info("My Application - INITIALIZATION");
+    log.info("StartupBean Application - INITIALIZATION");
 
     CompletableFuture.runAsync(() -> {
       process.run();

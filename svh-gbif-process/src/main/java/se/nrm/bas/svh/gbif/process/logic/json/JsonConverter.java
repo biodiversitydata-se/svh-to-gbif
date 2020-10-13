@@ -40,30 +40,32 @@ public class JsonConverter implements Serializable {
     AtomicInteger counter = new AtomicInteger(0);
     List<JsonArray> list = new ArrayList<>();
     JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
-    
+
     records.stream()
             .filter(record -> record.isConsistent())
-            .forEach(record -> {  
-              Map<String, String> map = record.toMap(); 
-              
+            .forEach(record -> {
+              Map<String, String> map = record.toMap();
+
 //              JsonHelper.getInstance().addIdAttribute(builder, 
 //                      Util.getInstance().buildId(map.get(catalogNumberKey), institutionCode));  
+              if (map.get(catalogNumberKey) != null && !map.get(catalogNumberKey).isEmpty()) {
+                JsonHelper.getInstance().addIdAttribute(builder, map.get(catalogNumberKey));
+                mappingJson.keySet()
+                        .stream()
+                        .forEach(key -> {
+                          JsonObject json = mappingJson.getJsonObject(key);
+                          JsonHelper.getInstance().addAttribute(builder,
+                                  json.getString(valueKey).trim(),
+                                  json.getString(typeKey), map.get(key));
+                        });
+                arrayBuilder.add(builder);
 
-              JsonHelper.getInstance().addIdAttribute(builder, map.get(catalogNumberKey)); 
-              mappingJson.keySet()
-                      .stream() 
-                      .forEach(key -> {
-                        JsonObject json = mappingJson.getJsonObject(key);
-                        JsonHelper.getInstance().addAttribute(builder,
-                                json.getString(valueKey).trim(),
-                                json.getString(typeKey), map.get(key));
-                      });
-              arrayBuilder.add(builder);
-             
-              counter.getAndIncrement();
-              if(counter.get() % batchSize == 0) {  
-                list.add(arrayBuilder.build());
+                counter.getAndIncrement();
+                if (counter.get() % batchSize == 0) {
+                  list.add(arrayBuilder.build());
+                }
               }
+
             });
     list.add(arrayBuilder.build());
     return list;
@@ -72,8 +74,9 @@ public class JsonConverter implements Serializable {
   public List<SimpleDwc> mapEntities(JsonArray array) {
     ObjectMapper objectMapper = new ObjectMapper();
     objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-    try { 
-      return objectMapper.readValue(array.toString(), new TypeReference<List<SimpleDwc>>() {});
+    try {
+      return objectMapper.readValue(array.toString(), new TypeReference<List<SimpleDwc>>() {
+      });
     } catch (JsonProcessingException ex) {
       log.error(ex.getMessage());
     }
