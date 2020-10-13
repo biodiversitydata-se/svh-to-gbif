@@ -6,11 +6,11 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.Serializable; 
-import java.util.Arrays; 
+import java.util.Arrays;
 import java.util.List;  
 import java.util.stream.StreamSupport;
 import javax.inject.Inject;
-import javax.json.JsonArray; 
+import javax.json.JsonArray;  
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.csv.CSVFormat; 
 import org.apache.commons.csv.CSVRecord;
@@ -26,6 +26,7 @@ public class CsvFileProcessor implements Serializable {
   private final int maxRows = 100001;
   private final char tabSepartor = '\t';
   private final String institutionKey = "institution";
+  private final String downloadKey = "download";
  
   private CSVFormat csvFileFormat; 
 
@@ -39,6 +40,7 @@ public class CsvFileProcessor implements Serializable {
   public void processCsvFile(JsonArray mappingArray, String dataSourcePath, String csvFilePath) {
 
     mappingArray.stream().parallel()
+            .filter(a -> a.asJsonObject().getBoolean(downloadKey))
             .forEach(a -> {
               String institutionCode = a.asJsonObject().getString(institutionKey);   
               boolean isDone = false;
