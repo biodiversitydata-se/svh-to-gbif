@@ -31,16 +31,15 @@ public class GbifDao implements Serializable {
 
   @PersistenceContext(unitName = "jpaGbifUpsPU")
   private EntityManager upsEntityManager;
-  
-  
+
   @PersistenceContext(unitName = "jpaGbifOhnPU")
   private EntityManager ohnEntityManager;
-  
+
   private final String gb = "GB";
   private final String ume = "UME";
   private final String ups = "UPS";
   private final String ohn = "OHN";
-  
+
   public GbifDao() {
   }
 
@@ -62,49 +61,51 @@ public class GbifDao implements Serializable {
   }
 
   public void merge(List<SimpleDwc> entities, String institutionCode)
-          throws OptimisticLockException, ConstraintViolationException { 
+          throws OptimisticLockException, ConstraintViolationException {
 
     EntityManager entityManager = getEntityManager(institutionCode);
-    entities.stream()  
-            .forEach(entity -> {
+    if (entityManager != null) {
+      entities.stream()
+              .forEach(entity -> {
 //              isExist(entity.getId(), entityManager);  
-              SimpleDwc tmp = entity;
-              try {
-                tmp = entityManager.merge(entity);             
-              } catch (OptimisticLockException | ConstraintViolationException e) {
-                log.error(e.getMessage());
-                throw e;
-              }
-            });
-    entityManager.flush();
-    entityManager.clear();
-  } 
-  
+                SimpleDwc tmp = entity;
+                try {
+                  tmp = entityManager.merge(entity);
+                } catch (OptimisticLockException | ConstraintViolationException e) {
+                  log.error(e.getMessage());
+                  throw e;
+                }
+              });
+      entityManager.flush();
+      entityManager.clear();
+    } 
+  }
+
   private EntityManager getEntityManager(String institutionCode) {
-    switch(institutionCode) {
+    switch (institutionCode) {
       case gb:
         return gbEntityManager;
       case ume:
         return umeEntityManager;
       case ups:
-        return upsEntityManager; 
+        return upsEntityManager;
       case ohn:
         return ohnEntityManager;
       default:
-        return gbEntityManager;
-    } 
+        return null;
+    }
   }
-  
-  private void isExist(String id, EntityManager entityManager) { 
+
+  private void isExist(String id, EntityManager entityManager) {
     Query query = entityManager.createNamedQuery("SimpleDwc.findCount")
-                  .setParameter("id", id); 
-    try { 
-      boolean exist = ((Number) query.getSingleResult()).intValue() > 0; 
-      if(exist) {
+            .setParameter("id", id);
+    try {
+      boolean exist = ((Number) query.getSingleResult()).intValue() > 0;
+      if (exist) {
         log.info("find : {}", id);
       }
     } catch (Exception e) {
-      log.info(e.getMessage()); 
-    } 
+      log.info(e.getMessage());
+    }
   }
 }
