@@ -129,8 +129,8 @@ CREATE TABLE `simpleDwc` (
   `maximumDistanceAboveSurfaceInMeters` varchar(45) DEFAULT NULL,
   `locationAccordingTo` varchar(45) DEFAULT NULL,
   `locationRemarks` text,
-  `decimalLatitude` decimal(12,10) DEFAULT NULL,
-  `decimalLongitude` decimal(13,10) DEFAULT NULL,
+  `decimalLatitude` double DEFAULT NULL,
+  `decimalLongitude` double DEFAULT NULL,
   `geodeticDatum` varchar(50) DEFAULT NULL,
   `coordinateUncertaintyInMeters` double DEFAULT NULL,
   `coordinatePrecision` varchar(45) DEFAULT NULL,
@@ -223,4 +223,4 @@ CREATE TABLE `simpleDwc` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-08-17 15:41:14
+-- Dump completed on 2020-11-18  9:02:20

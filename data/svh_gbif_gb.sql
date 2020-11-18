@@ -27,7 +27,7 @@ CREATE TABLE `logs` (
   `timestamp` datetime NOT NULL,
   `totalRecords` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -129,8 +129,8 @@ CREATE TABLE `simpleDwc` (
   `maximumDistanceAboveSurfaceInMeters` varchar(45) DEFAULT NULL,
   `locationAccordingTo` varchar(45) DEFAULT NULL,
   `locationRemarks` text,
-  `decimalLatitude` decimal(12,10) DEFAULT NULL,
-  `decimalLongitude` decimal(13,10) DEFAULT NULL,
+  `decimalLatitude` double DEFAULT NULL,
+  `decimalLongitude` double DEFAULT NULL,
   `geodeticDatum` varchar(50) DEFAULT NULL,
   `coordinateUncertaintyInMeters` double DEFAULT NULL,
   `coordinatePrecision` varchar(45) DEFAULT NULL,
@@ -223,4 +223,4 @@ CREATE TABLE `simpleDwc` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-08-17 15:39:46
+-- Dump completed on 2020-11-18  8:59:39
