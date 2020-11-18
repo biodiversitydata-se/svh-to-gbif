@@ -2,7 +2,7 @@ package se.nrm.bas.svh.gbif.datamodel;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import java.io.Serializable;
-import java.math.BigDecimal;
+//import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -412,10 +412,10 @@ public class SimpleDwc implements Serializable {
   private String locationRemarks;
   
   @Column(name = "decimalLatitude")
-  private BigDecimal decimalLatitude;
+  private Double decimalLatitude;
   
   @Column(name = "decimalLongitude")
-  private BigDecimal decimalLongitude;
+  private Double decimalLongitude;
   
   @Size(max = 50)
   @Column(name = "geodeticDatum")
@@ -1467,19 +1467,19 @@ public class SimpleDwc implements Serializable {
     this.locationRemarks = locationRemarks;
   }
 
-  public BigDecimal getDecimalLatitude() {
+  public Double getDecimalLatitude() {
     return decimalLatitude;
   }
 
-  public void setDecimalLatitude(BigDecimal decimalLatitude) {
+  public void setDecimalLatitude(Double decimalLatitude) {
     this.decimalLatitude = decimalLatitude;
   }
 
-  public BigDecimal getDecimalLongitude() {
+  public Double getDecimalLongitude() {
     return decimalLongitude;
   }
 
-  public void setDecimalLongitude(BigDecimal decimalLongitude) {
+  public void setDecimalLongitude(Double decimalLongitude) {
     this.decimalLongitude = decimalLongitude;
   }
 
@@ -2121,10 +2121,7 @@ public class SimpleDwc implements Serializable {
       return false;
     }
     SimpleDwc other = (SimpleDwc) object;
-    if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-      return false;
-    }
-    return true;
+    return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
   }
 
   @Override
