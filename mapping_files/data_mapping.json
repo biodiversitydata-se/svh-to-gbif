@@ -1,6 +1,6 @@
 [{
     "institution": "UME",
-    "download": true,
+    "download": false,
     "mapping": {
       "﻿﻿institutionCode": {
         "value": "institutionCode",
@@ -80,6 +80,10 @@
       },
       "OriginalName": {
         "value": "previousIdentifications",
+        "type": "String"
+      },
+      "Type-status": {
+        "value": "typeStatus",
         "type": "String"
       }
     }
@@ -167,12 +171,16 @@
       "OriginalName": {
         "value": "previousIdentifications",
         "type": "String"
+      },
+      "Type-status": {
+        "value": "typeStatus",
+        "type": "String"
       }
     }
   },
   {
     "institution": "UPS",
-    "download": true,
+    "download": false,
     "mapping": {
       "﻿﻿institutionCode": {
         "value": "institutionCode",
@@ -252,6 +260,10 @@
       },
       "OriginalName": {
         "value": "previousIdentifications",
+        "type": "String"
+      },
+      "Type-status": {
+        "value": "typeStatus",
         "type": "String"
       }
     }
@@ -338,6 +350,10 @@
       },
       "OriginalName": {
         "value": "previousIdentifications",
+        "type": "String"
+      },
+      "Type-status": {
+        "value": "typeStatus",
         "type": "String"
       }
     }
