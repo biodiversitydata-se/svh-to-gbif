@@ -59,3 +59,16 @@ swarm:
         failOverReadOnly: false&maxReconnects=10&autoReconnect=true
         validation-query: 'select 1'
         max-idle-time: 5
+      OhnGbifDS:
+        driver-name: com.mysql
+        jndi-name: java:jboss/datasources/OhnGbifDS
+        connection-url: jdbc:mysql://localhost:13306/svh_gbif_ohn?autoReconnect=true&useSSL=false
+        user-name: user
+        password: password
+        min-pool-size: 8
+        max-pool-size: 35
+        pool-prefill: true
+        autoReconnect: true
+        failOverReadOnly: false&maxReconnects=10&autoReconnect=true
+        validation-query: 'select 1'
+        max-idle-time: 5
