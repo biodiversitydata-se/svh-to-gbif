@@ -66,6 +66,10 @@
         "value": "infraspecificEpithet",
         "type": "String"
       },
+      "ImageLinks": {
+        "value": "associatedMedia",
+        "type": "String"
+     },
       "RT90-N": {
         "value": "verbatimLatitude",
         "type": "String"
@@ -74,7 +78,11 @@
         "value": "verbatimLongitude",
         "type": "String"
       },
-      "RUBIN": {
+      "coordinateUncertaintyInMeters": {
+        "value": "coordinateUncertaintyInMeters",
+        "type": "String"
+      },
+      "georeferenceRemarks": {
         "value": "georeferenceRemarks",
         "type": "String"
       },
@@ -156,6 +164,10 @@
         "value": "infraspecificEpithet",
         "type": "String"
       },
+      "ImageLinks": {
+        "value": "associatedMedia",
+        "type": "String"
+     },
       "RT90-N": {
         "value": "verbatimLatitude",
         "type": "String"
@@ -164,7 +176,11 @@
         "value": "verbatimLongitude",
         "type": "String"
       },
-      "RUBIN": {
+      "coordinateUncertaintyInMeters": {
+        "value": "coordinateUncertaintyInMeters",
+        "type": "String"
+      },
+      "georeferenceRemarks": {
         "value": "georeferenceRemarks",
         "type": "String"
       },
@@ -246,6 +262,10 @@
         "value": "infraspecificEpithet",
         "type": "String"
       },
+      "ImageLinks": {
+        "value": "associatedMedia",
+        "type": "String"
+     },
       "RT90-N": {
         "value": "verbatimLatitude",
         "type": "String"
@@ -254,7 +274,11 @@
         "value": "verbatimLongitude",
         "type": "String"
       },
-      "RUBIN": {
+      "coordinateUncertaintyInMeters": {
+        "value": "coordinateUncertaintyInMeters",
+        "type": "String"
+      },
+      "georeferenceRemarks": {
         "value": "georeferenceRemarks",
         "type": "String"
       },
@@ -336,6 +360,10 @@
         "value": "infraspecificEpithet",
         "type": "String"
       },
+      "ImageLinks": {
+        "value": "associatedMedia",
+        "type": "String"
+     },
       "RT90-N": {
         "value": "verbatimLatitude",
         "type": "String"
@@ -344,7 +372,11 @@
         "value": "verbatimLongitude",
         "type": "String"
       },
-      "RUBIN": {
+      "coordinateUncertaintyInMeters": {
+        "value": "coordinateUncertaintyInMeters",
+        "type": "String"
+      },
+      "georeferenceRemarks": {
         "value": "georeferenceRemarks",
         "type": "String"
       },
@@ -359,6 +391,31 @@
     }
   }
 ]
+
+
+
+
+// mapping: coordinateUncertaintyInMeters
+// ImageLinks: associatedMedia
+
+// coordinateUncertaintyInMeters
+// ImageLinks
+// ImageThumbLinks
+// georeferenceRemarks
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
