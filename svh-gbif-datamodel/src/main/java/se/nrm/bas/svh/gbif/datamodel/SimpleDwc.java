@@ -184,7 +184,7 @@ public class SimpleDwc implements Serializable {
   @Column(name = "disposition")
   private String disposition;
   
-  @Size(max = 45)
+  @Size(max = 128)
   @Column(name = "associatedMedia")
   private String associatedMedia;
   
