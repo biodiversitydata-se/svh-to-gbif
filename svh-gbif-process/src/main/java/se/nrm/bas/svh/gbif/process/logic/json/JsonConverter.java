@@ -29,6 +29,10 @@ public class JsonConverter implements Serializable {
   private final String valueKey = "value";
   private final String typeKey = "type";
   private final String catalogNumberKey = "CatalogNumber";
+  private final String wgs84n = "WGS84N";
+  private final String wgs84s = "WGS84S";
+  private final String cSource = "CSource";
+  private final String none = "None";
   private final int batchSize = 200;
     
   public JsonConverter() {
@@ -53,10 +57,14 @@ public class JsonConverter implements Serializable {
                 mappingJson.keySet()
                         .stream()
                         .forEach(key -> {
-                          JsonObject json = mappingJson.getJsonObject(key);
-                          JsonHelper.getInstance().addAttribute(builder,
-                                  json.getString(valueKey).trim(),
-                                  json.getString(typeKey), map.get(key));
+                          if(key.equals(wgs84n) || key.equals(wgs84s)) {
+                            String cValue = map.get(cSource);
+                            if(!map.get(cSource).equals(none)) {
+                              addValueToJson(builder,  mappingJson.getJsonObject(key), map.get(key));
+                            }
+                          } else {
+                            addValueToJson(builder,  mappingJson.getJsonObject(key), map.get(key));
+                          } 
                         });
                 arrayBuilder.add(builder);
 
@@ -70,6 +78,13 @@ public class JsonConverter implements Serializable {
     list.add(arrayBuilder.build());
     return list;
   }
+
+  private void addValueToJson(JsonObjectBuilder builder, JsonObject json, String value) { 
+    JsonHelper.getInstance().addAttribute(builder,
+            json.getString(valueKey).trim(),
+            json.getString(typeKey), value); 
+  }
+ 
 
   public List<SimpleDwc> mapEntities(JsonArray array) {
     ObjectMapper objectMapper = new ObjectMapper();
