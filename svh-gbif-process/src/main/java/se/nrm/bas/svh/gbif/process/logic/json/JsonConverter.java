@@ -33,6 +33,7 @@ public class JsonConverter implements Serializable {
   private final String wgs84s = "WGS84S";
   private final String cSource = "CSource";
   private final String none = "None";
+  private final String zeorString = "0";
   private final int batchSize = 200;
     
   public JsonConverter() {
@@ -52,27 +53,28 @@ public class JsonConverter implements Serializable {
 
 //              JsonHelper.getInstance().addIdAttribute(builder, 
 //                      Util.getInstance().buildId(map.get(catalogNumberKey), institutionCode));  
-              if (map.get(catalogNumberKey) != null && !map.get(catalogNumberKey).isEmpty()) {
-                JsonHelper.getInstance().addIdAttribute(builder, map.get(catalogNumberKey));
-                mappingJson.keySet()
-                        .stream()
-                        .forEach(key -> {
-                          if(key.equals(wgs84n) || key.equals(wgs84s)) {
-                            String cValue = map.get(cSource);
-                            if(!map.get(cSource).equals(none)) {
-                              addValueToJson(builder,  mappingJson.getJsonObject(key), map.get(key));
-                            }
-                          } else {
-                            addValueToJson(builder,  mappingJson.getJsonObject(key), map.get(key));
-                          } 
-                        });
-                arrayBuilder.add(builder);
+      if (map.get(catalogNumberKey) != null && !map.get(catalogNumberKey).isEmpty()) {
+        JsonHelper.getInstance().addIdAttribute(builder, map.get(catalogNumberKey));
+        mappingJson.keySet()
+                .stream()
+                .forEach(key -> {
+                  boolean addValueToJson = true;
+                  if (key.equals(wgs84n) || key.equals(wgs84s)) {
+                    if(map.get(key).equals(zeorString) && map.get(cSource).equals(none)) {
+                      addValueToJson =false;
+                    } 
+                  } 
+                  if(addValueToJson) {
+                    addValueToJson(builder, mappingJson.getJsonObject(key), map.get(key));
+                  } 
+                });
+        arrayBuilder.add(builder);
 
-                counter.getAndIncrement();
-                if (counter.get() % batchSize == 0) {
-                  list.add(arrayBuilder.build());
-                }
-              }
+        counter.getAndIncrement();
+        if (counter.get() % batchSize == 0) {
+          list.add(arrayBuilder.build());
+        }
+      }
 
             });
     list.add(arrayBuilder.build());
